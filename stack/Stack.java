@@ -37,6 +37,62 @@ public class Stack<T> {
         return this.top;
     }
 
+    public boolean isEmpty() {
+        return this.height == 0;
+    }
+
+    public static String reverseString(String str) {
+
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : str.toCharArray()) {
+            stack.push(c);
+        }
+
+        StringBuilder reversed = new StringBuilder();
+
+        while (!stack.isEmpty()) {
+            reversed.append(stack.pop());
+        }
+
+        return reversed.toString();
+    }
+
+    public static boolean isBalanced(String str) {
+
+        if (str == null || str.length() % 2 != 0) {
+            return false;
+        }
+
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : str.toCharArray()) {
+
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else if (c == ')' || c == '}' || c == ']') {
+
+                if (stack.isEmpty())
+                    return false;
+
+                char top = stack.pop().value;
+
+                if (c == ')' && top != '(')
+                    return false;
+                if (c == '}' && top != '{')
+                    return false;
+                if (c == ']' && top != '[')
+                    return false;
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
     public void print() {
 
         Node<T> temp = this.top;
