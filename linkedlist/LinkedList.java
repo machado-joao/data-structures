@@ -1,5 +1,8 @@
 package linkedlist;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.StringJoiner;
 
 class LinkedList<T> {
@@ -236,6 +239,53 @@ class LinkedList<T> {
         }
 
         return slow;
+    }
+
+    // Runner technique
+
+    public void removeDuplicatesRunner() {
+
+        Node<T> current = this.head;
+
+        while (current != null) {
+
+            Node<T> runner = current;
+
+            while (runner.next != null && runner.next != null) {
+                if (Objects.equals(runner.next.value, current.value)) {
+                    runner.next = runner.next.next;
+                    this.length -= 1;
+                } else {
+                    runner = runner.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+
+    public void removeDuplicates() {
+
+        if (this.head == null) {
+            return;
+        }
+
+        Set<T> values = new HashSet<>();
+
+        Node<T> previous = null;
+        Node<T> current = this.head;
+
+        while (current != null) {
+
+            if (values.contains(current.value)) {
+                previous.next = current.next;
+                this.length -= 1;
+            } else {
+                values.add(current.value);
+                previous = current;
+            }
+            current = current.next;
+        }
+
     }
 
     public Node<T> getHead() {
