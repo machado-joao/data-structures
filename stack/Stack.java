@@ -1,6 +1,6 @@
 package stack;
 
-public class Stack<T> {
+public class Stack<T extends Comparable<T>> {
 
     private Node<T> top;
     private int height;
@@ -91,6 +91,49 @@ public class Stack<T> {
         }
 
         return stack.isEmpty();
+    }
+
+    public void sortStack(Stack<T> originalStack) {
+
+        Stack<T> sortedStack = new Stack<>();
+
+        while (!originalStack.isEmpty()) {
+            T current = originalStack.pop().value;
+            while (!sortedStack.isEmpty() && sortedStack.peek().value.compareTo(current) > 0) {
+                originalStack.push(sortedStack.pop().value);
+            }
+            sortedStack.push(current);
+        }
+
+        while (!sortedStack.isEmpty()) {
+            originalStack.push(sortedStack.pop().value);
+        }
+
+    }
+
+    public void enqueue(T value) {
+
+        Stack<T> tempStack = new Stack<>();
+
+        while (!this.isEmpty()) {
+            tempStack.push(this.pop().value);
+        }
+
+        this.push(value);
+
+        while (!tempStack.isEmpty()) {
+            this.push(tempStack.pop().value);
+        }
+
+    }
+
+    public T dequeue() {
+
+        if (this.isEmpty()) {
+            return null;
+        }
+
+        return this.pop().value;
     }
 
     public void print() {
