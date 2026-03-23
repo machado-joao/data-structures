@@ -1,5 +1,10 @@
 package bst;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class BinarySearchTree<T> {
 
     Node<T> root;
@@ -65,6 +70,29 @@ public class BinarySearchTree<T> {
         }
 
         return false; // Either the tree is empty or the value was not found
+    }
+
+    // Breadth-First Search (BFS) traversal
+
+    public List<T> breadthFirstSearch() {
+
+        Node<T> currentNode = this.root;
+        Queue<Node<T>> queue = new LinkedList<>();
+        List<T> results = new ArrayList<>();
+        queue.add(currentNode);
+
+        while (!queue.isEmpty()) {
+            currentNode = queue.remove();
+            results.add(currentNode.value);
+            if (currentNode.left != null) {
+                queue.add(currentNode.left);
+            }
+            if (currentNode.right != null) {
+                queue.add(currentNode.right);
+            }
+        }
+
+        return results;
     }
 
 }
