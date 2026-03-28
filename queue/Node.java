@@ -5,7 +5,7 @@ class Node<E> {
     E value;
     Node<E> next;
 
-    public Node(E value) {
+    Node(E value) {
         this.value = value;
     }
 

@@ -56,7 +56,7 @@ public class Stack<T extends Comparable<T>> {
         StringBuilder reversed = new StringBuilder();
 
         while (!stack.isEmpty()) {
-            reversed.append(stack.pop());
+            reversed.append(stack.pop().value);
         }
 
         return reversed.toString();
