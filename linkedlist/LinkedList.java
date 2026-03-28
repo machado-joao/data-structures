@@ -251,10 +251,13 @@ class LinkedList<T> {
 
             Node<T> runner = current;
 
-            while (runner.next != null && runner.next != null) {
+            while (runner.next != null) {
                 if (Objects.equals(runner.next.value, current.value)) {
+                    if (runner.next.next == null) {
+                        this.tail = runner;
+                    }
                     runner.next = runner.next.next;
-                    this.length -= 1;
+                    this.length--;
                 } else {
                     runner = runner.next;
                 }
@@ -278,7 +281,10 @@ class LinkedList<T> {
 
             if (values.contains(current.value)) {
                 previous.next = current.next;
-                this.length -= 1;
+                if (current.next == null) {
+                    this.tail = previous;
+                }
+                this.length--;
             } else {
                 values.add(current.value);
                 previous = current;
