@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class BinarySearchTree<T> {
+public class BinarySearchTree<T extends Comparable<T>> {
 
     Node<T> root;
 
@@ -36,11 +36,11 @@ public class BinarySearchTree<T> {
         Node<T> temp = this.root;
         while (true) {
 
-            if (newNode.value == temp.value) {
+            if (newNode.compareTo(temp.value) == 0) {
                 return false; // Duplicate value, do not insert
             }
 
-            if (newNode.value.toString().compareTo(temp.value.toString()) < 0) {
+            if (newNode.compareTo(temp.value) < 0) {
                 if (temp.left == null) {
                     temp.left = newNode;
                     return true;
@@ -60,9 +60,10 @@ public class BinarySearchTree<T> {
 
         Node<T> temp = this.root;
         while (temp != null) {
-            if (value.toString().compareTo(temp.value.toString()) < 0) {
+            int cmp = value.compareTo(temp.value);
+            if (cmp < 0) {
                 temp = temp.left;
-            } else if (value.toString().compareTo(temp.value.toString()) > 0) {
+            } else if (cmp > 0) {
                 temp = temp.right;
             } else {
                 return true;
@@ -76,9 +77,14 @@ public class BinarySearchTree<T> {
 
     public List<T> breadthFirstSearch() {
 
-        Node<T> currentNode = this.root;
-        Queue<Node<T>> queue = new LinkedList<>();
         List<T> results = new ArrayList<>();
+
+        if (this.root == null) {
+            return results;
+        }
+
+        Queue<Node<T>> queue = new LinkedList<>();
+        Node<T> currentNode = this.root;
         queue.add(currentNode);
 
         while (!queue.isEmpty()) {

@@ -1,6 +1,6 @@
 package bst;
 
-public class Node<T> implements Comparable<T> {
+public class Node<T extends Comparable<T>> implements Comparable<T> {
 
     T value;
     Node<T> left;
@@ -13,13 +13,8 @@ public class Node<T> implements Comparable<T> {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public int compareTo(T o) {
-        if (this.value instanceof Comparable) {
-            return ((Comparable<T>) this.value).compareTo(o);
-        } else {
-            throw new IllegalArgumentException("Value must be comparable");
-        }
+        return this.value.compareTo(o);
     }
 
 }
