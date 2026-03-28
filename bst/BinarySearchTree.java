@@ -101,4 +101,75 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return results;
     }
 
+    // Depth-First Search (DFS) traversals
+
+    public List<T> depthFirstSearchPreOrder() {
+
+        List<T> results = new ArrayList<>();
+
+        class Traverse {
+            Traverse(Node<T> node) {
+                results.add(node.value);
+                if (node.left != null) {
+                    new Traverse(node.left);
+                }
+                if (node.right != null) {
+                    new Traverse(node.right);
+                }
+            }
+        }
+
+        if (this.root != null) {
+            new Traverse(this.root);
+        }
+
+        return results;
+    }
+
+    public List<T> depthFirstSearchPostOrder() {
+
+        List<T> results = new ArrayList<>();
+
+        class Traverse {
+            Traverse(Node<T> node) {
+                if (node.left != null) {
+                    new Traverse(node.left);
+                }
+                if (node.right != null) {
+                    new Traverse(node.right);
+                }
+                results.add(node.value);
+            }
+        }
+
+        if (this.root != null) {
+            new Traverse(this.root);
+        }
+
+        return results;
+    }
+
+    public List<T> depthFirstSearchInOrder() {
+
+        List<T> results = new ArrayList<>();
+
+        class Traverse {
+            Traverse(Node<T> node) {
+                if (node.left != null) {
+                    new Traverse(node.left);
+                }
+                results.add(node.value);
+                if (node.right != null) {
+                    new Traverse(node.right);
+                }
+            }
+        }
+
+        if (this.root != null) {
+            new Traverse(this.root);
+        }
+
+        return results;
+    }
+
 }

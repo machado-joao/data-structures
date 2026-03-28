@@ -27,7 +27,8 @@ public class Main {
         bst2.insert(52);
         bst2.insert(82);
 
-        System.out.println(bst2.depthFirstSearchPreOrder()); // [47, 21, 18, 27, 76, 52, 82]
+        //System.out.println(bst2.depthFirstSearchPreOrder()); // [47, 21, 18, 27, 76, 52, 82]
+        System.out.println(bst2.depthFirstSearchInOrder()); // [18, 21, 27, 47, 52, 76, 82]
 
         
     }
